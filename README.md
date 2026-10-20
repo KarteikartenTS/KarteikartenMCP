@@ -25,9 +25,31 @@ curl -fsSL https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main
 irm https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main/install.ps1 | iex
 ```
 
-Danach in einem neuen Fenster: `cd ~/Karteikarten-Redaktion` und `claude`. Ein zweiter Lauf
-aktualisiert alles. Noch einfacher: Der Knopf im Panel kopiert dieselbe Zeile gleich mit deinem
-persönlichen Code.
+### Was macht das?
+
+Ganz einfach erklärt – das Programm erledigt alles von selbst, Schritt für Schritt:
+
+1. **Es schaut nach, was fehlt.** Was schon da ist, wird nicht noch einmal installiert.
+2. **Es holt die nötigen Helfer:** „Node.js“ (damit die Verbindung läuft) und „Claude Code“
+   (der Assistent). Beides kommt direkt vom Hersteller.
+3. **Es richtet die Verbindung zu den Karteikarten ein** und legt einen Ordner
+   „Karteikarten-Redaktion“ an. Darin arbeitest du später.
+4. **Es fragt einmal nach deinem Code** aus dem Panel. Den einfach einfügen und Enter drücken.
+5. **Es prüft, ob alles klappt,** und zeigt am Ende deinen Namen und „Fertig!“.
+
+Gut zu wissen:
+
+- Du brauchst **kein Administrator-Passwort**. Am Computer wird nichts verstellt.
+- Es dauert ein paar Minuten. Einfach warten, bis „Fertig!“ erscheint.
+- Geht etwas schief, steht dort in Rot, was zu tun ist. Du kannst die Zeile jederzeit noch einmal
+  einfügen – das schadet nicht und bringt alles auf den neuesten Stand.
+
+**Danach:** ein neues Fenster öffnen, `cd ~/Karteikarten-Redaktion` eingeben, Enter, dann `claude`
+eingeben, Enter. Beim ersten Mal meldest du dich bei Claude an. Dann z. B. fragen:
+„Welche Module gibt es?“
+
+Noch einfacher: Der Knopf im Panel kopiert dieselbe Zeile gleich mit deinem persönlichen Code –
+dann entfällt Schritt 4.
 
 ## Wer darf was?
 

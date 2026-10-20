@@ -84,7 +84,7 @@ $In = $Code
 if (-not $In -and (Test-Path $KeyFile) -and (Get-Item $KeyFile).Length -gt 0) { Ok "Schluessel schon vorhanden ($KeyFile)" }
 else {
   if (-not $In) {
-    Write-Host "  Im Panel ($Panel) anmelden -> 'Kurse & Karten' -> 'Mit Claude Code bearbeiten' ->"
+    Write-Host "  Im Panel ($Panel) anmelden -> 'Kurse & Karten' -> 'Claude als Helfer' ->"
     Write-Host "  'Mit einem Klick einrichten' und den kopierten Befehl hier einfuegen:"
     $In = Read-Host '  >'
   }

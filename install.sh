@@ -82,7 +82,7 @@ if [ -z "$INPUT" ] && [ -s "$KEYFILE" ]; then
   ok "Schlüssel schon vorhanden ($KEYFILE)"
 else
   if [ -z "$INPUT" ]; then
-    echo "  Im Panel ($PANEL) anmelden → „Kurse & Karten“ → „Mit Claude Code bearbeiten“ →"
+    echo "  Im Panel ($PANEL) anmelden → „Kurse & Karten“ → „Claude als Helfer“ →"
     echo "  „Mit einem Klick einrichten“ und den kopierten Befehl hier einfügen:"
     read -r -p "  > " INPUT < /dev/tty || true
   fi

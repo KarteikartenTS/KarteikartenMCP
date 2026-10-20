@@ -31,7 +31,7 @@ function token() {
 async function api(method, path, body) {
   const r = await fetch(BASE + path, {
     method,
-    headers: { Authorization: `Bearer ${token()}`, 'Content-Type': 'application/json', 'User-Agent': 'karteikarten-mcp/1.1' },
+    headers: { Authorization: `Bearer ${token()}`, 'Content-Type': 'application/json', 'User-Agent': 'karteikarten-mcp/1.2' },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   const data = await r.json().catch(() => ({}));
@@ -177,7 +177,6 @@ const TOOLS = [
   },
   {
     name: 'get_stats',
-    admin: true,
     description: 'Anonymer Lernfortschritt: Lernende, Pakete (Module) mit gelernten Karten, Aktivität, Fortschritt je Kapitel (nur Gruppen ab der Mindestgruppe).',
     inputSchema: { type: 'object', properties: {} },
     run: () => api('GET', '/api/admin/stats'),
@@ -200,7 +199,7 @@ async function onMessage(msg) {
     return send({ id, result: {
       protocolVersion: params?.protocolVersion || '2025-06-18',
       capabilities: { tools: {} },
-      serverInfo: { name: 'karteikarten-admin', version: '1.1.0' },
+      serverInfo: { name: 'karteikarten-admin', version: '1.2.0' },
       instructions: 'Admin-Panel der Karteikarten-App (TÜV SÜD Akademie). Karten bestehen aus Kapitel, Vorderseite, Rückseite, Tags. '
         + 'Beim Ändern immer die bestehende id mitgeben, damit der Lernstand erhalten bleibt. Löschen und replace nur auf ausdrücklichen Wunsch.',
     } });

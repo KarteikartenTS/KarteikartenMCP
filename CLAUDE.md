@@ -17,7 +17,7 @@ Antworte auf Deutsch, knapp und in Stichpunkten.
 | `save_module` | Modul anlegen oder Titel ändern |
 | `list_reports`, `update_report` | Fehlermeldungen und Wünsche der Lernenden beantworten |
 
-Freischalt-Codes, Statistik und Zugänge verwaltet nur der Admin.
+Freischalt-Codes und Zugänge verwaltet nur der Admin. Die anonyme Lernstatistik (`get_stats`) darfst du lesen, z. B. um mit Studierenden über schwierige Kapitel zu sprechen.
 
 ## Arbeitsweise (wichtig)
 

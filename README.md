@@ -7,12 +7,34 @@ Admin-Panel lesen und pflegen, auch in großen Mengen.
 > **Nur für die eigene Anwendung im Karteikartensystem.** Keine Weitergabe, keine Nutzung für andere
 > Zwecke – siehe [LICENSE](LICENSE). Ohne persönlichen Zugang zum Panel funktioniert der Server nicht.
 
+## „Ich habe keine Ahnung“ – eine Zeile, alles fertig
+
+Installiert alles, was fehlt (Node.js, Claude Code, MCP-Server), ohne Administratorrechte, und meldet
+den Server bei Claude Code an. Am Ende fragt das Skript nach deinem Einrichtungs-Befehl aus dem Panel
+(„Kurse & Karten“ → „Mit Claude Code bearbeiten“ → „Mit einem Klick einrichten“).
+
+**macOS / Linux** – Terminal öffnen (Mac: <kbd>⌘</kbd>+<kbd>Leertaste</kbd>, „Terminal“), einfügen, Enter:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main/install.sh | bash
+```
+
+**Windows** – PowerShell öffnen (<kbd>Win</kbd>+<kbd>X</kbd> → „Terminal“), einfügen, Enter:
+
+```powershell
+irm https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main/install.ps1 | iex
+```
+
+Danach in einem neuen Fenster: `cd ~/Karteikarten-Redaktion` und `claude`. Ein zweiter Lauf
+aktualisiert alles. Noch einfacher: Der Knopf im Panel kopiert dieselbe Zeile gleich mit deinem
+persönlichen Code.
+
 ## Wer darf was?
 
 | Zugang | Schlüssel | Werkzeuge |
 |---|---|---|
-| Redaktion (Professoren, Lektorat) | persönlicher API-Schlüssel `edk-…` aus dem Panel | `whoami`, `list_modules`, `save_module`, `get_cards`, `upsert_cards`, `delete_cards`, `get_card_history`, `list_reports`, `update_report` |
-| Admin | Admin-Schlüssel | zusätzlich Codes, Statistik, Modul löschen |
+| Redaktion (Professoren, Lektorat) | persönlicher API-Schlüssel `edk-…` aus dem Panel | `whoami`, `list_modules`, `save_module`, `get_cards`, `upsert_cards`, `delete_cards`, `get_card_history`, `list_reports`, `update_report`, `get_stats` (anonyme Lernstatistik) |
+| Admin | Admin-Schlüssel | zusätzlich Freischalt-Codes, Modul löschen |
 
 Der Server zeigt nur die Werkzeuge an, die dein Zugang benutzen darf. Jede Änderung landet mit deinem
 Namen und Grund in der Korrekturhistorie der Karte.

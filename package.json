@@ -1,0 +1,27 @@
+{
+  "name": "karteikarten-mcp",
+  "version": "1.1.0",
+  "description": "MCP-Server für das Karteikartensystem (TÜV SÜD Akademie, Prototyp) – nur für berechtigte Nutzer mit Panel-Zugang",
+  "type": "module",
+  "bin": {
+    "karteikarten-mcp": "server.js"
+  },
+  "files": [
+    "server.js",
+    "CLAUDE.md",
+    ".mcp.json.example",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarteikartenTS/KarteikartenMCP.git"
+  },
+  "scripts": {
+    "prepublishOnly": "node -e \"if(require('fs').readFileSync('LICENSE','utf8').includes('{{')){console.error('LICENSE: Rechteinhaber fehlt noch');process.exit(1)}\""
+  }
+}

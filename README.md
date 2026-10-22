@@ -7,7 +7,7 @@ Admin-Panel lesen und pflegen, auch in großen Mengen.
 > **Nur für die eigene Anwendung im Karteikartensystem.** Keine Weitergabe, keine Nutzung für andere
 > Zwecke – siehe [LICENSE](LICENSE). Ohne persönlichen Zugang zum Panel funktioniert der Server nicht.
 
-## „Ich habe keine Ahnung“ – eine Zeile, alles fertig
+## In einer Zeile eingerichtet – ganz ohne Vorkenntnisse
 
 Installiert alles, was fehlt (Node.js, Claude Code, MCP-Server), ohne Administratorrechte, und meldet
 den Server bei Claude Code an. Am Ende fragt das Skript nach deinem Einrichtungs-Befehl aus dem Panel

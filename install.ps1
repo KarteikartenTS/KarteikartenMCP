@@ -1,4 +1,4 @@
-# Karteikarten-MCP – Komplett-Einrichtung für Windows („Ich habe keine Ahnung“).
+# Karteikarten-MCP – Komplett-Einrichtung für Windows – in einer Zeile, ohne Vorkenntnisse.
 # © 2026 IB-Thomee GmbH. Alle Rechte vorbehalten – nur für die eigene Anwendung im Karteikartensystem.
 #
 #   irm https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main/install.ps1 | iex

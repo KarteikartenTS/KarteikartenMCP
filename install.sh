@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Karteikarten-MCP – Komplett-Einrichtung für macOS und Linux („Ich habe keine Ahnung“).
+# Karteikarten-MCP – Komplett-Einrichtung für macOS und Linux – in einer Zeile, ohne Vorkenntnisse.
 # © 2026 IB-Thomee GmbH. Alle Rechte vorbehalten – nur für die eigene Anwendung im Karteikartensystem.
 #
 #   curl -fsSL https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main/install.sh | bash

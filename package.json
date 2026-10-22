@@ -21,7 +21,5 @@
     "type": "git",
     "url": "git+https://github.com/KarteikartenTS/KarteikartenMCP.git"
   },
-  "scripts": {
-    "prepublishOnly": "node -e \"if(require('fs').readFileSync('LICENSE','utf8').includes('{{')){console.error('LICENSE: Rechteinhaber fehlt noch');process.exit(1)}\""
-  }
+  "private": true
 }

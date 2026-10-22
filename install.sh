@@ -6,7 +6,7 @@
 #   … | bash -s -- <Einrichtungs-Code aus dem Panel>     (optional, sonst wird gefragt)
 #
 # Installiert ohne Administratorrechte: Node.js (nur falls nötig, nach ~/.karteikarten/node),
-# Claude Code (offizieller Installer), den MCP-Server (npm-Paket karteikarten-mcp) und
+# Claude Code (offizieller Installer), den MCP-Server (direkt aus dem GitHub-Repo KarteikartenTS/KarteikartenMCP) und
 # meldet ihn bei Claude Code an. Wiederholbar – ein zweiter Lauf aktualisiert alles.
 set -euo pipefail
 
@@ -66,12 +66,13 @@ fi
 
 # ---------- 3. MCP-Server ----------
 say "3/4 MCP-Server (karteikarten-mcp)"
-"$(dirname "$NODE")/npm" install --silent --no-fund --no-audit --prefix "$KK/app" karteikarten-mcp@latest >/dev/null
-SERVER="$KK/app/node_modules/karteikarten-mcp/server.js"
-[ -f "$SERVER" ] || fail "MCP-Server konnte nicht geladen werden."
-ok "Version $("$NODE" -p "require('$KK/app/node_modules/karteikarten-mcp/package.json').version")"
-if [ -f "$WORK/CLAUDE.md" ]; then cp "$KK/app/node_modules/karteikarten-mcp/CLAUDE.md" "$WORK/CLAUDE.vorlage.md"
-else cp "$KK/app/node_modules/karteikarten-mcp/CLAUDE.md" "$WORK/CLAUDE.md"; fi
+REPO="https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main"
+mkdir -p "$KK/app"
+for f in server.js CLAUDE.md package.json; do curl -fsSL "$REPO/$f" -o "$KK/app/$f.neu" && mv "$KK/app/$f.neu" "$KK/app/$f" || fail "MCP-Server konnte nicht geladen werden ($f)."; done
+SERVER="$KK/app/server.js"
+ok "Version $("$NODE" -p "require('$KK/app/package.json').version")"
+if [ -f "$WORK/CLAUDE.md" ]; then cp "$KK/app/CLAUDE.md" "$WORK/CLAUDE.vorlage.md"
+else cp "$KK/app/CLAUDE.md" "$WORK/CLAUDE.md"; fi
 ok "Arbeitsordner: $WORK"
 
 # ---------- 4. Persönlicher Schlüssel + Anmeldung bei Claude ----------

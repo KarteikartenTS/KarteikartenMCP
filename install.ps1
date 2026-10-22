@@ -5,7 +5,7 @@
 #   & ([scriptblock]::Create((irm <url>))) <Einrichtungs-Code>     (optional, sonst wird gefragt)
 #
 # Installiert ohne Administratorrechte: Node.js (nur falls nötig, nach ~\.karteikarten\node),
-# Claude Code (offizieller Installer, braucht Git für Windows), den MCP-Server (npm-Paket karteikarten-mcp)
+# Claude Code (offizieller Installer, braucht Git für Windows), den MCP-Server (direkt aus dem GitHub-Repo KarteikartenTS/KarteikartenMCP)
 # und meldet ihn bei Claude Code an. Wiederholbar – ein zweiter Lauf aktualisiert alles.
 param([string]$Code = '')
 $ErrorActionPreference = 'Stop'
@@ -68,10 +68,13 @@ else {
 
 # ---------- 3. MCP-Server ----------
 Say '3/4 MCP-Server (karteikarten-mcp)'
-& (Join-Path $NodeDir 'npm.cmd') install --silent --no-fund --no-audit --prefix (Join-Path $KK 'app') karteikarten-mcp@latest | Out-Null
-$Pkg = Join-Path $KK 'app\node_modules\karteikarten-mcp'
+$Repo = 'https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main'
+$Pkg = Join-Path $KK 'app'
+New-Item -ItemType Directory -Force $Pkg | Out-Null
+foreach ($f in 'server.js', 'CLAUDE.md', 'package.json') {
+  try { Invoke-WebRequest "$Repo/$f" -OutFile (Join-Path $Pkg $f) -UseBasicParsing } catch { Fail "MCP-Server konnte nicht geladen werden ($f)." }
+}
 $Server = Join-Path $Pkg 'server.js'
-if (-not (Test-Path $Server)) { Fail 'MCP-Server konnte nicht geladen werden.' }
 Ok "Version $((Get-Content (Join-Path $Pkg 'package.json') -Raw | ConvertFrom-Json).version)"
 $md = if (Test-Path (Join-Path $Work 'CLAUDE.md')) { 'CLAUDE.vorlage.md' } else { 'CLAUDE.md' }
 Copy-Item (Join-Path $Pkg 'CLAUDE.md') (Join-Path $Work $md) -Force

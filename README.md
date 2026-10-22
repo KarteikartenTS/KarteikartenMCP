@@ -75,12 +75,6 @@ Namen und Grund in der Korrekturhistorie der Karte.
 **„Mit einem Klick einrichten“**. Der kopierte Befehl legt `~/Karteikarten-Redaktion` mit Server,
 `CLAUDE.md` und `.mcp.json` an und hinterlegt deinen Schlüssel.
 
-**Per npm** (Voraussetzungen: Claude Code und Node.js ab Version 18, Schlüssel wie unten in Schritt 2 abgelegt):
-
-```bash
-claude mcp add --scope user karteikarten -- npx -y karteikarten-mcp
-```
-
 **Manuell** (Voraussetzungen: Claude Code und Node.js ab Version 18):
 
 1. Dieses Repo herunterladen (Code → Download ZIP) oder klonen.

@@ -74,7 +74,7 @@ const TOOLS = [
         title: { type: 'string', description: 'Anzeigename, z. B. "Mündliche Prüfung"' },
         public: { type: 'boolean', description: 'true = für alle ohne Code sichtbar' },
         laender: { type: 'array', items: { type: 'string', enum: ['BW', 'BY', 'BE', 'BB', 'HB', 'HH', 'HE', 'MV', 'NI', 'NW', 'RP', 'SL', 'SN', 'ST', 'SH', 'TH'] },
-          description: 'Bundesländer, für die das Paket gedacht ist (leer = bundesweit). Standorte: Cottenheim = NW, Ulm = BW, Leipzig/Ost = BB, BE, MV, SN, ST, TH' },
+          description: 'Bundesländer, für die das Paket gedacht ist (leer = bundesweit). Standorte: Cottenheim = NW + RP, Ulm = BW + BY, Leipzig/Ost = BB, BE, MV, SN, ST, TH' },
       },
       required: ['id', 'title'],
     },

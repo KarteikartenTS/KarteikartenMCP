@@ -157,7 +157,7 @@ const TOOLS = [
   },
   {
     name: 'list_reports',
-    description: 'Fehlermeldungen und Wünsche der Lernenden (type fehler/wunsch) inkl. betroffener Karte, Antwort und interner Notiz.',
+    description: 'Fehlermeldungen, Fragen und Wünsche der Lernenden (type fehler/frage/wunsch) inkl. betroffener Karte, Antwort und interner Notiz.',
     inputSchema: { type: 'object', properties: { status: { type: 'string', enum: ['offen', 'in-arbeit', 'erledigt', 'abgelehnt', 'alle'] } } },
     run: (a) => api('GET', `/api/admin/reports?status=${encodeURIComponent(a.status || 'offen')}`),
   },

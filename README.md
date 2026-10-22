@@ -11,7 +11,7 @@ Admin-Panel lesen und pflegen, auch in großen Mengen.
 
 Installiert alles, was fehlt (Node.js, Claude Code, MCP-Server), ohne Administratorrechte, und meldet
 den Server bei Claude Code an. Am Ende fragt das Skript nach deinem Einrichtungs-Befehl aus dem Panel
-(„Kurse & Karten“ → „Claude als Helfer“ → „Mit einem Klick einrichten“).
+(„Karteneditor“ → „Claude als Helfer“ → „Mit einem Klick einrichten“).
 
 **macOS / Linux** – Terminal öffnen (Mac: <kbd>⌘</kbd>+<kbd>Leertaste</kbd>, „Terminal“), einfügen, Enter:
 
@@ -27,7 +27,7 @@ irm https://raw.githubusercontent.com/KarteikartenTS/KarteikartenMCP/main/instal
 
 ### Wo finde ich meinen Code?
 
-Im Admin-Panel anmelden → Tab **„Kurse & Karten“** → Bereich **„Claude als Helfer“** → Knopf
+Im Admin-Panel anmelden → Tab **„Karteneditor“** → Bereich **„Claude als Helfer“** → Knopf
 **„Mit einem Klick einrichten“**. Der Befehl mit deinem persönlichen Code wird sofort kopiert – du musst ihn
 nur noch im Terminal einfügen.
 
@@ -71,7 +71,7 @@ Namen und Grund in der Korrekturhistorie der Karte.
 
 ## Einrichten
 
-**Am einfachsten:** Im Panel anmelden → Tab „Kurse & Karten“ → „Claude als Helfer“ →
+**Am einfachsten:** Im Panel anmelden → Tab „Karteneditor“ → „Claude als Helfer“ →
 **„Mit einem Klick einrichten“**. Der kopierte Befehl legt `~/Karteikarten-Redaktion` mit Server,
 `CLAUDE.md` und `.mcp.json` an und hinterlegt deinen Schlüssel.
 

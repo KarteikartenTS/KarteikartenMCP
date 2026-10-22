@@ -85,3 +85,8 @@ Freischalt-Codes und Zugänge verwaltet nur der Admin. Die anonyme Lernstatistik
 - Keine personenbezogenen Daten in Karten oder Antworten.
 - Der API-Schlüssel liegt in `~/.karteikarten/api-key.txt`. Ihn niemals anzeigen, in den Chat kopieren oder in
   andere Dateien schreiben.
+
+## Bundesland / Zuständigkeit
+- Jedes Kartenpaket kann Bundesländer haben (`laender`, leer = bundesweit). Standorte: Cottenheim = NW, Ulm = BW, Leipzig (Ost) = BB, BE, MV, SN, ST, TH.
+- Professoren haben eine Zuständigkeit (Marktgebiet); `whoami` zeigt sie. Bevorzugt Pakete der eigenen Zuständigkeit bearbeiten.
+- Im Panel heißt der Bereich jetzt „Karteneditor“; Karten werden dort visuell bearbeitet. Fertige Bausteine: Anmerkung (blau), Merksatz (grün), Achtung (rot), Abweichung zur Musterlösung, Ahndung (Scharniernorm), Promille-Strahl, Tabelle, Quelle.

@@ -4,7 +4,7 @@
 // Damit kann Claude Code Module, Karten, Codes und Meldungen pflegen – auch in großen Mengen.
 //
 // Admin: alle Werkzeuge. Redaktion (Professoren, API-Schlüssel edk-… aus dem Panel): nur Kurse, Karten, Meldungen.
-// Download für die Redaktion: https://karteikarten-admin.pages.dev/mcp/server.js (Anleitung im Panel, Tab „Kurse & Karten“).
+// Download für die Redaktion: https://karteikarten-admin.pages.dev/mcp/server.js (Anleitung im Panel, Tab „Karteneditor“).
 //
 // Schlüssel (erster Treffer gilt):
 //   KARTEIKARTEN_ADMIN_TOKEN       direkt als Umgebungsvariable (nicht empfohlen)
@@ -24,14 +24,14 @@ const TOKEN_FILES = [process.env.KARTEIKARTEN_ADMIN_TOKEN_FILE, join(homedir(), 
 function token() {
   if (process.env.KARTEIKARTEN_ADMIN_TOKEN) return process.env.KARTEIKARTEN_ADMIN_TOKEN.trim();
   const file = TOKEN_FILES.find((f) => existsSync(f));
-  if (!file) throw new Error(`Kein Schlüssel gefunden. Im Panel unter „Kurse & Karten“ einen API-Schlüssel erzeugen und in ${TOKEN_FILES[TOKEN_FILES.length - 2]} speichern.`);
+  if (!file) throw new Error(`Kein Schlüssel gefunden. Im Panel unter „Karteneditor“ einen API-Schlüssel erzeugen und in ${TOKEN_FILES[TOKEN_FILES.length - 2]} speichern.`);
   return readFileSync(file, 'utf8').trim();
 }
 
 async function api(method, path, body) {
   const r = await fetch(BASE + path, {
     method,
-    headers: { Authorization: `Bearer ${token()}`, 'Content-Type': 'application/json', 'User-Agent': 'karteikarten-mcp/1.2' },
+    headers: { Authorization: `Bearer ${token()}`, 'Content-Type': 'application/json', 'User-Agent': 'karteikarten-mcp/1.3' },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   const data = await r.json().catch(() => ({}));
@@ -66,13 +66,15 @@ const TOOLS = [
   },
   {
     name: 'save_module',
-    description: 'Modul anlegen oder Titel/Sichtbarkeit ändern. Neue Module sind standardmäßig nur per Freischalt-Code sichtbar.',
+    description: 'Modul anlegen oder Titel/Sichtbarkeit/Bundesländer ändern. Neue Module sind standardmäßig nur per Freischalt-Code sichtbar.',
     inputSchema: {
       type: 'object',
       properties: {
         id: { type: 'string', description: 'Kennung: Kleinbuchstaben, Ziffern, Bindestrich, z. B. "muendliche-pruefung"' },
         title: { type: 'string', description: 'Anzeigename, z. B. "Mündliche Prüfung"' },
         public: { type: 'boolean', description: 'true = für alle ohne Code sichtbar' },
+        laender: { type: 'array', items: { type: 'string', enum: ['BW', 'BY', 'BE', 'BB', 'HB', 'HH', 'HE', 'MV', 'NI', 'NW', 'RP', 'SL', 'SN', 'ST', 'SH', 'TH'] },
+          description: 'Bundesländer, für die das Paket gedacht ist (leer = bundesweit). Standorte: Cottenheim = NW, Ulm = BW, Leipzig/Ost = BB, BE, MV, SN, ST, TH' },
       },
       required: ['id', 'title'],
     },
@@ -199,7 +201,7 @@ async function onMessage(msg) {
     return send({ id, result: {
       protocolVersion: params?.protocolVersion || '2025-06-18',
       capabilities: { tools: {} },
-      serverInfo: { name: 'karteikarten-admin', version: '1.2.0' },
+      serverInfo: { name: 'karteikarten-admin', version: '1.3.0' },
       instructions: 'Admin-Panel der Karteikarten-App (TÜV SÜD Akademie). Karten bestehen aus Kapitel, Vorderseite, Rückseite, Tags. '
         + 'Beim Ändern immer die bestehende id mitgeben, damit der Lernstand erhalten bleibt. Löschen und replace nur auf ausdrücklichen Wunsch.',
     } });

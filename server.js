@@ -162,6 +162,33 @@ const TOOLS = [
     run: (a) => api('GET', `/api/admin/reports?status=${encodeURIComponent(a.status || 'offen')}`),
   },
   {
+    name: 'get_requests',
+    description: 'Anfragen der Lernenden (Fehler/Fragen/Wünsche) zusammen mit der aktuellen Karte (Modul, Kapitel, Vorder-/Rückseite, Tags) – '
+      + 'zum Bearbeiten direkt mit upsert_cards (Karte samt id übernehmen) und update_report.',
+    inputSchema: { type: 'object', properties: { status: { type: 'string', enum: ['offen', 'in-arbeit', 'erledigt', 'abgelehnt', 'alle'] } } },
+    run: async (a) => {
+      const { reports } = await api('GET', `/api/admin/reports?status=${encodeURIComponent(a.status || 'offen')}`);
+      const { modules } = await api('GET', '/api/admin/modules');
+      const byTitle = new Map(modules.map((m) => [m.title, m.id]));
+      const cache = new Map();
+      const cardsOf = async (id) => {
+        if (!cache.has(id)) cache.set(id, (await api('GET', `/api/admin/modules/${encodeURIComponent(id)}/cards`)).cards);
+        return cache.get(id);
+      };
+      for (const r of reports) {
+        if (!r.card_id) continue;
+        // Modul über den Stapelnamen, sonst alle Module durchsuchen
+        const first = byTitle.get(String(r.deck || '').split('::')[0]);
+        for (const id of first ? [first, ...modules.map((m) => m.id).filter((x) => x !== first)] : modules.map((m) => m.id)) {
+          const c = (await cardsOf(id)).find((x) => x.id === r.card_id);
+          if (c) { r.card = { module: id, id: c.id, chapter: c.chapter, front: c.front, back: c.back, tags: c.tags }; break; }
+        }
+        if (!r.card) r.card = null; // Karte inzwischen gelöscht
+      }
+      return { reports };
+    },
+  },
+  {
     name: 'update_report',
     description: 'Status einer Meldung/eines Wunsches setzen, optional Antwort an die einsendende Person (sichtbar in der App) '
       + 'und interne Notiz. Weggelassene Felder bleiben unverändert.',
@@ -201,7 +228,7 @@ async function onMessage(msg) {
     return send({ id, result: {
       protocolVersion: params?.protocolVersion || '2025-06-18',
       capabilities: { tools: {} },
-      serverInfo: { name: 'karteikarten-admin', version: '1.3.0' },
+      serverInfo: { name: 'karteikarten-admin', version: '1.4.0' },
       instructions: 'Admin-Panel der Karteikarten-App (TÜV SÜD Akademie). Karten bestehen aus Kapitel, Vorderseite, Rückseite, Tags. '
         + 'Beim Ändern immer die bestehende id mitgeben, damit der Lernstand erhalten bleibt. Löschen und replace nur auf ausdrücklichen Wunsch.',
     } });

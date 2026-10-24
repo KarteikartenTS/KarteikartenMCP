@@ -15,7 +15,7 @@ Antworte auf Deutsch, knapp und in Stichpunkten.
 | `delete_cards` | Karten löschen |
 | `get_card_history` | frühere Fassungen einer Karte bzw. letzte Änderungen |
 | `save_module` | Modul anlegen oder Titel ändern |
-| `list_reports`, `update_report` | Fehlermeldungen und Wünsche der Lernenden beantworten |
+| `get_requests`, `list_reports`, `update_report` | Anfragen der Lernenden samt Karte lesen und beantworten |
 
 Freischalt-Codes und Zugänge verwaltet nur der Admin. Die anonyme Lernstatistik (`get_stats`) darfst du lesen, z. B. um mit Studierenden über schwierige Kapitel zu sprechen.
 
@@ -76,7 +76,7 @@ Freischalt-Codes und Zugänge verwaltet nur der Admin. Die anonyme Lernstatistik
 
 ## Meldungen der Lernenden
 
-- `list_reports` zeigt offene Fehlermeldungen und Wünsche, ggf. mit betroffener Karte.
+- `get_requests` zeigt offene Anfragen (Fehler, Fragen, Wünsche) gleich mit der aktuellen Karte – die kann direkt mit `upsert_cards` (gleiche `id`) korrigiert werden. `list_reports` liefert nur die Meldungen.
 - Karte korrigieren (Arbeitsweise oben), dann `update_report` mit Status `erledigt` und einer kurzen, freundlichen
   Antwort (sie erscheint in der App unter „Meine Rückmeldungen“), z. B. „Danke! Der Grenzwert ist korrigiert.“
 

@@ -1,6 +1,6 @@
 {
   "name": "karteikarten-mcp",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "MCP-Server für das Karteikartensystem (TÜV SÜD Akademie, Prototyp) – nur für berechtigte Nutzer mit Panel-Zugang",
   "type": "module",
   "bin": {

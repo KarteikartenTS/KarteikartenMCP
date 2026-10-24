@@ -16,6 +16,7 @@ Antworte auf Deutsch, knapp und in Stichpunkten.
 | `get_card_history` | frühere Fassungen einer Karte bzw. letzte Änderungen |
 | `save_module` | Modul anlegen oder Titel ändern |
 | `get_requests`, `list_reports`, `update_report` | Anfragen der Lernenden samt Karte lesen und beantworten |
+| `propose_answer` | Vorschlag (Antwort und/oder Karte) im Panel zum Gegenlesen ablegen – wirksam erst nach „Freigeben“ |
 
 Freischalt-Codes und Zugänge verwaltet nur der Admin. Die anonyme Lernstatistik (`get_stats`) darfst du lesen, z. B. um mit Studierenden über schwierige Kapitel zu sprechen.
 
@@ -77,8 +78,10 @@ Freischalt-Codes und Zugänge verwaltet nur der Admin. Die anonyme Lernstatistik
 ## Meldungen der Lernenden
 
 - `get_requests` zeigt offene Anfragen (Fehler, Fragen, Wünsche) gleich mit der aktuellen Karte – die kann direkt mit `upsert_cards` (gleiche `id`) korrigiert werden. `list_reports` liefert nur die Meldungen.
-- Karte korrigieren (Arbeitsweise oben), dann `update_report` mit Status `erledigt` und einer kurzen, freundlichen
-  Antwort (sie erscheint in der App unter „Meine Rückmeldungen“), z. B. „Danke! Der Grenzwert ist korrigiert.“
+- **Standard: Vorschlag zum Gegenlesen.** Antwortentwurf und ggf. die vollständige neue Karte mit `propose_answer` ablegen.
+  Im Panel liest jemand gegen und klickt „Freigeben“ – erst dann wird die Karte geändert und die Antwort ist in der App sichtbar.
+- Nur auf ausdrücklichen Wunsch direkt: Karte korrigieren (Arbeitsweise oben), dann `update_report` mit Status `erledigt` und einer
+  kurzen, freundlichen Antwort (sie erscheint in der App unter „Meine Rückmeldungen“), z. B. „Danke! Der Grenzwert ist korrigiert.“
 
 ## Datenschutz und Sicherheit
 

@@ -63,7 +63,7 @@ dann entfällt Schritt 4.
 
 | Zugang | Schlüssel | Werkzeuge |
 |---|---|---|
-| Redaktion (Professoren, Lektorat) | persönlicher API-Schlüssel `edk-…` aus dem Panel | `whoami`, `list_modules`, `save_module`, `get_cards`, `upsert_cards`, `delete_cards`, `get_card_history`, `list_reports`, `get_requests`, `update_report`, `get_stats` (anonyme Lernstatistik) |
+| Redaktion (Professoren, Lektorat) | persönlicher API-Schlüssel `edk-…` aus dem Panel | `whoami`, `list_modules`, `save_module`, `get_cards`, `upsert_cards`, `delete_cards`, `get_card_history`, `list_reports`, `get_requests`, `propose_answer`, `update_report`, `get_stats` (anonyme Lernstatistik) |
 | Admin | Admin-Schlüssel | zusätzlich Freischalt-Codes, Modul löschen |
 
 Der Server zeigt nur die Werkzeuge an, die dein Zugang benutzen darf. Jede Änderung landet mit deinem

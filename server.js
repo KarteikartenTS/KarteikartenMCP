@@ -189,6 +189,33 @@ const TOOLS = [
     },
   },
   {
+    name: 'propose_answer',
+    description: 'Vorschlag zu einer Anfrage im Panel zwischenspeichern (zum Gegenlesen): Antwortentwurf und/oder geänderte Karte. '
+      + 'Für Lernende unsichtbar, bis jemand im Panel „Freigeben“ klickt – dann wird die Karte geändert (Tag korrigiert), die Antwort gesendet '
+      + 'und die Anfrage erledigt. Ein neuer Vorschlag ersetzt den alten; discard=true verwirft ihn.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number', description: 'Nummer der Anfrage' },
+        reply: { type: 'string', description: 'Antwortentwurf an die Lernenden, freundlich und kurz' },
+        card: {
+          type: 'object',
+          description: 'Vollständige neue Fassung der Karte (aus get_requests übernehmen und anpassen; id behalten)',
+          properties: {
+            module: { type: 'string' }, id: { type: 'string' }, chapter: { type: 'string' },
+            front: { type: 'string' }, back: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } },
+            reason: { type: 'string', description: 'Grund für die Korrekturhistorie' },
+          },
+          required: ['module', 'id', 'front', 'back'],
+        },
+        discard: { type: 'boolean', description: 'Vorschlag verwerfen' },
+      },
+      required: ['id'],
+    },
+    run: (a) => (a.discard ? api('DELETE', `/api/admin/reports/${a.id}/draft`)
+      : api('POST', `/api/admin/reports/${a.id}/draft`, { reply: a.reply, card: a.card })),
+  },
+  {
     name: 'update_report',
     description: 'Status einer Meldung/eines Wunsches setzen, optional Antwort an die einsendende Person (sichtbar in der App) '
       + 'und interne Notiz. Weggelassene Felder bleiben unverändert.',
@@ -228,7 +255,7 @@ async function onMessage(msg) {
     return send({ id, result: {
       protocolVersion: params?.protocolVersion || '2025-06-18',
       capabilities: { tools: {} },
-      serverInfo: { name: 'karteikarten-admin', version: '1.4.0' },
+      serverInfo: { name: 'karteikarten-admin', version: '1.5.0' },
       instructions: 'Admin-Panel der Karteikarten-App (TÜV SÜD Akademie). Karten bestehen aus Kapitel, Vorderseite, Rückseite, Tags. '
         + 'Beim Ändern immer die bestehende id mitgeben, damit der Lernstand erhalten bleibt. Löschen und replace nur auf ausdrücklichen Wunsch.',
     } });

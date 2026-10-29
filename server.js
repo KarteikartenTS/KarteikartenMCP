@@ -216,6 +216,13 @@ const TOOLS = [
       : api('POST', `/api/admin/reports/${a.id}/draft`, { reply: a.reply, card: a.card })),
   },
   {
+    name: 'approve_answer',
+    description: 'Vorschlag einer Anfrage freigeben – nur, wenn der Mensch im Chat ausdrücklich zugestimmt hat. Ändert die Karte '
+      + '(Tag korrigiert), sendet die Antwort an die Lernenden und setzt die Anfrage auf erledigt.',
+    inputSchema: { type: 'object', properties: { id: { type: 'number', description: 'Nummer der Anfrage' } }, required: ['id'] },
+    run: (a) => api('POST', `/api/admin/reports/${a.id}/approve`, {}),
+  },
+  {
     name: 'update_report',
     description: 'Status einer Meldung/eines Wunsches setzen, optional Antwort an die einsendende Person (sichtbar in der App) '
       + 'und interne Notiz. Weggelassene Felder bleiben unverändert.',
@@ -255,7 +262,7 @@ async function onMessage(msg) {
     return send({ id, result: {
       protocolVersion: params?.protocolVersion || '2025-06-18',
       capabilities: { tools: {} },
-      serverInfo: { name: 'karteikarten-admin', version: '1.5.0' },
+      serverInfo: { name: 'karteikarten-admin', version: '1.6.0' },
       instructions: 'Admin-Panel der Karteikarten-App (TÜV SÜD Akademie). Karten bestehen aus Kapitel, Vorderseite, Rückseite, Tags. '
         + 'Beim Ändern immer die bestehende id mitgeben, damit der Lernstand erhalten bleibt. Löschen und replace nur auf ausdrücklichen Wunsch.',
     } });
